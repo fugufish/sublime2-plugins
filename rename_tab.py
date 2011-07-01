@@ -20,8 +20,9 @@ class RenameTabCommand(sublime_plugin.TextCommand):
     new_file = file_dir + os.sep + new_file
     shutil.copyfile(old_file, new_file)
     if os.path.isfile(new_file):
+      self.view.window().run_command("open", new_file)
       self.view.window().run_command("close")
       if old_file.endswith(".py"):
         os.remove(old_file + "c")
       os.remove(old_file)
-      self.view.window().run_command("open", new_file)
+     
